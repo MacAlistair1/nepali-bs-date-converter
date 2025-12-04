@@ -1,0 +1,33 @@
+{
+  "name": "nepali-bs-date-converter",
+  "version": "1.0.0",
+  "description": "A lightweight Nepali (Bikram Sambat) date converter: AD ↔ BS with validation and utilities.",
+  "main": "dist/nepali-date-converter.umd.js",
+  "module": "dist/nepali-date-converter.esm.js",
+  "jsdelivr": "dist/nepali-date-converter.umd.js",
+  "unpkg": "dist/nepali-date-converter.umd.js",
+  "author": "Jeeven Lamichhane",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "keywords": [
+    "nepali date",
+    "ad to bs",
+    "bs to ad",
+    "bikram sambat",
+    "date converter",
+    "calendar"
+  ],
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^21.0.2",
+    "@rollup/plugin-node-resolve": "^13.0.6",
+    "rollup": "^2.79.0",
+    "rollup-plugin-terser": "^7.0.2"
+  }
+}
