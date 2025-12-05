@@ -2,13 +2,13 @@
   "name": "nepali-bs-date-converter",
   "version": "1.0.0",
   "description": "A lightweight Nepali (Bikram Sambat) date converter: AD ↔ BS with validation and utilities.",
-  "main": "dist/nepali-date-converter.umd.js",
-  "module": "dist/nepali-date-converter.esm.js",
-  "jsdelivr": "dist/nepali-date-converter.umd.js",
-  "unpkg": "dist/nepali-date-converter.umd.js",
+  "main": "dist/nepali-bs-date-converter.umd.js",
+  "module": "dist/nepali-bs-date-converter.esm.js",
+  "type": "module",
+  "jsdelivr": "dist/nepali-bs-date-converter.umd.js",
+  "unpkg": "dist/nepali-bs-date-converter.umd.js",
   "author": "Jeeven Lamichhane",
   "license": "MIT",
-  "type": "module",
   "scripts": {
     "build": "rollup -c"
   },

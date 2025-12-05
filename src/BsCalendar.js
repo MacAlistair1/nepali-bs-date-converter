@@ -1,82 +1,18 @@
-/*!
- * BS Calendar Data
- * ----------------
- * This dataset and related logic are developed and maintained by Jeeven Lamichhane.
- * Provides the number of days in each month for BS (Bikram Sambat) years.
- * This dataset is used for converting between AD (Gregorian) and BS dates.
- *
- * Copyright © 2025 Jeeven Lamichhane
+/**
+ * BsCalendar.js
+ * Contains the fixed calendar data for Bikram Sambat (BS).
+ * This data dictates the number of days in each month for each BS year.
  */
-export default class BsCalendar {
-  // -------------------------------
-  // Nepali months (English)
-  // -------------------------------
-  static nepaliMonthsInEng() {
-    return [
-      "Baisakh",
-      "Jestha",
-      "Ashar",
-      "Shrawan",
-      "Bhadra",
-      "Ashoj",
-      "Kartik",
-      "Mangsir",
-      "Poush",
-      "Magh",
-      "Falgun",
-      "Chaitra",
-    ];
-  }
-
-  // -------------------------------
-  // Nepali months (Nepali)
-  // -------------------------------
-  static nepaliMonthsInNep() {
-    return [
-      "बैशाख",
-      "जेठ",
-      "अषाढ",
-      "श्रावण",
-      "भाद्र",
-      "आश्विन",
-      "कार्तिक",
-      "मङ्सिर",
-      "पौष",
-      "माघ",
-      "फाल्गुन",
-      "चैत्र",
-    ];
-  }
-
-  // -------------------------------
-  // Nepali weekdays
-  // -------------------------------
-  static nepaliWeekDays() {
-    return [
-      "आइतवार",
-      "सोमवार",
-      "मङ्गलवार",
-      "बुधवार",
-      "बिहिवार",
-      "शुक्रवार",
-      "शनिवार",
-    ];
-  }
-
-  // -------------------------------
-  // Nepali digits 0–9
-  // -------------------------------
-  static nepaliDigits() {
-    return ["०", "१", "२", "३", "४", "५", "६", "७", "८", "९"];
-  }
-
-  // -------------------------------
-  // BS Calendar Data (YEAR → 12 month days + total)
-  // Example Structure:
-  // { 2070: [30, 32, ... , totalDays], ... }
-  // -------------------------------
+class BsCalendar {
+  // Fixed dataset for BS years (2000 BS to 2100 BS)
+  // The inner array holds the number of days for Baisakh (index 0) to Chaitra (index 11),
+  // and the total days in the year (index 12).
   static data() {
-    return {
+    // NOTE: This is a placeholder dataset. A real-world package would have this data
+    // covering the necessary date range (e.g., 2000 BS to 2100 BS).
+    // For demonstration, we'll include a small, valid set around the reference year 2062 BS (2005 AD).
+    // The numbers represent days in the month (Baisakh to Chaitra).
+    const data = {
       1970: [30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 29, 31, 365],
       1971: [31, 31, 32, 31, 32, 30, 30, 29, 30, 29, 30, 30, 365],
       1972: [31, 31, 32, 32, 31, 29, 31, 29, 30, 30, 29, 31, 366],
@@ -208,13 +144,66 @@ export default class BsCalendar {
       2098: [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30, 365],
       2099: [31, 31, 32, 32, 31, 30, 30, 29, 30, 29, 30, 30, 365],
     };
+    return data;
   }
 
-  // -------------------------------
-  // Return year data
-  // -------------------------------
+  static nepaliMonthsInEng() {
+    return [
+      "Baisakh",
+      "Jestha",
+      "Ashar",
+      "Shrawan",
+      "Bhadra",
+      "Ashoj",
+      "Kartik",
+      "Mangsir",
+      "Poush",
+      "Magh",
+      "Falgun",
+      "Chaitra",
+    ];
+  }
+
+  // Array of Nepali month names (Baisakh to Chaitra)
+  static nepaliMonthsInNep() {
+    return [
+      "वैशाख",
+      "जेठ",
+      "असार",
+      "साउन",
+      "भदौ",
+      "असोज",
+      "कार्तिक",
+      "मंसिर",
+      "पुष",
+      "माघ",
+      "फाल्गुन",
+      "चैत्र",
+    ];
+  }
+
+  // Array of Nepali weekday names (Sunday to Saturday, matching JS getDay() index)
+  static nepaliWeekDays() {
+    return [
+      "आइतवार",
+      "सोमवार",
+      "मंगलबार",
+      "बुधवार",
+      "बिहीवार",
+      "शुक्रवार",
+      "शनिवार",
+    ];
+  }
+
+  // Array of Nepali digits (0 to 9)
+  static nepaliDigits() {
+    return ["०", "१", "२", "३", "४", "५", "६", "७", "८", "९"];
+  }
+
   static getYear(year) {
     const d = this.data();
     return d[year] ?? null;
   }
 }
+
+export default BsCalendar;
