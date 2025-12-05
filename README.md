@@ -1,11 +1,14 @@
-# Nepali BS Date Converter
+# Nepali Date Converter (AD ↔ BS)
 
-A robust JavaScript library for accurate conversion between the Gregorian (AD) and Bikram Sambat (BS) calendar systems, complete with Nepali localization and flexible date formatting.🚀
+A lightweight JavaScript library for converting **Gregorian (AD)** dates to **Bikram Sambat (BS)** and vice versa. The library includes features for date validation, formatting, and various utility functions.
+
+---
 
 ## Installation
 
 ### Using npm
-npm install nepali-bs-date-converter
+
+    npm install nepali-bs-date-converter
 
 ### Via CDN (For Browser Use)
 For direct use in a web browser without a build step, include the UMD bundle script.  
@@ -21,54 +24,108 @@ Note: You must run a build tool (like Rollup or Webpack) to generate the dist/ne
   console.log(bsDate); // e.g., '2082-01-01'
 </script>
 
+---
+
 ## 🛠️ Usage
 
 The library exposes the NepaliDateConverter class with various static methods for conversion, validation, and formatting. You generally do not need to instantiate the class, as all core methods are static.
 
 ### Module Import (Node.js / React / Vue)
-import NepaliDateConverter from 'nepali-bs-date-converter';
+    import NepaliDateConverter from 'nepali-bs-date-converter';
 
-### AD to BS Conversion
-const adToConvert = '2023-09-25';
-const bsResult = NepaliDateConverter.adToBs(adToConvert);
-console.log(`AD ${adToConvert} is BS ${bsResult}`); 
-// Output: AD 2023-09-25 is BS 2080-09-08
+    // AD → BS
+    const bsDate = NepaliDateConverter.adToBs('2025-12-04');
+    console.log(bsDate); // e.g., '2082-08-19'
 
-### BS to AD Conversion
-const bsToConvert = '2080-09-08';
-const adResult = NepaliDateConverter.bsToAd(bsToConvert);
-console.log(`BS ${bsToConvert} is AD ${adResult}`);
-// Output: BS 2080-09-08 is AD 2023-09-25
+    // BS → AD
+    const adDate = NepaliDateConverter.bsToAd('2082-08-19');
+    console.log(adDate); // '2025-12-04'
 
-### Nepali Formatting
-Format a BS date in Nepali script: d, F Y, l (Day, Month Name, Year, Weekday)
-const formattedNep = NepaliDateConverter.formattedNepaliDate(
-    '2080-09-08', 
-    'd F, Y, l', 
-    'np'
-);
-// Output: ०८ पौष, २०८०, आईतवार
-console.log(formattedNep);
+    // Validate dates
+    console.log(NepaliDateConverter.isValidADDate('2025-12-04'));
+    console.log(NepaliDateConverter.isValidBSDate('2082-08-19'));
 
-### English Formatting (AD date, BS data)
-Format an AD date using its corresponding BS date values but with English locale:
-const formattedEn = NepaliDateConverter.formattedEnglishDate(
-    '2023-09-25', 
-    'Y-m-d l'
-);
-// Output: 2023-09-25 Monday
-console.log(formattedEn);
+    // Get detailed info
+    console.log(NepaliDateConverter.getBSInfo('2082-08-19'));
+    console.log(NepaliDateConverter.getADInfo('2025-12-04'));
 
-### Full Date Information
-The getBSInfo and getADInfo methods return detailed information about the date.
-const info = NepaliDateConverter.getADInfo('2024-04-13');
-/*
-{
-    ad: '2024-04-13',
-    bs: '2080-12-31', // The last day of 2080 BS
-    weekday: 'Saturday',
-    total_days_in_year: 366, // 2080 BS was a 366-day year
-    day_of_year: 366,
-    diff_days_from_today: ...,
-}
-*/
+    // Format Nepali date
+    console.log(NepaliDateConverter.formattedNepaliDate('2082-08-19', 'd F, Y, l', 'np'));
+
+    // Format English date
+    console.log(NepaliDateConverter.formattedEnglishDate('2025-12-04', 'd F, Y, l', 'en'));
+
+    // Get weekday
+    console.log(NepaliDateConverter.weekdayAD('2025-12-04', 'en'));
+    console.log(NepaliDateConverter.weekdayBS('2082-08-19', 'np'));
+
+---
+
+### Using via <script> (UMD)
+
+    <script src="https://cdn.jsdelivr.net/npm/nepali-bs-date-converter@1.0.0/dist/nepali-bs-date-converter.umd.js"></script>
+    <script>
+      const bsDate = NepaliDateConverter.adToBs('2025-12-04');
+      const adDate = NepaliDateConverter.bsToAd('2082-08-19');
+      const formattedNep = NepaliDateConverter.formattedNepaliDate('2082-08-19', 'd F, Y, l', 'np');
+      console.log(bsDate, adDate, formattedNep);
+    </script>
+
+---
+
+### Example HTML Page
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <title>Nepali Date Converter Demo</title>
+    </head>
+    <body>
+      <h1>Nepali Date Converter Demo</h1>
+      <p id="demo"></p>
+
+      <script src="https://cdn.jsdelivr.net/npm/nepali-bs-date-converter@1.0.0/dist/nepali-bs-date-converter.umd.js"></script>
+      <script>
+        const demoEl = document.getElementById('demo');
+
+        const bsDate = NepaliDateConverter.adToBs('2025-12-04');
+        const adDate = NepaliDateConverter.bsToAd('2082-08-19');
+        const formattedNep = NepaliDateConverter.formattedNepaliDate('2082-08-19', 'd F, Y, l', 'np');
+
+        demoEl.innerHTML = `
+          <strong>AD → BS:</strong> ${bsDate} <br>
+          <strong>BS → AD:</strong> ${adDate} <br>
+          <strong>Formatted Nepali:</strong> ${formattedNep}
+        `;
+      </script>
+    </body>
+    </html>
+
+---
+
+## Available Methods
+
+| Method | Description |
+|--------|-------------|
+| adToBs(adDate) | Convert AD to BS |
+| bsToAd(bsDate) | Convert BS to AD |
+| isValidADDate(adDate) | Validate AD date |
+| isValidBSDate(bsDate) | Validate BS date |
+| getADInfo(adDate) | Detailed AD date info |
+| getBSInfo(bsDate) | Detailed BS date info |
+| formattedNepaliDate(bsDate, format, locale) | Format BS date |
+| formattedEnglishDate(adDate, format, locale) | Format AD date |
+| weekdayAD(adDate, locale) | Weekday of AD date |
+| weekdayBS(bsDate, locale) | Weekday of BS date |
+
+---
+
+## Supported Locales
+
+| Locale | Description |
+|--------|-------------|
+| en | English |
+| np | Nepali (digits, months, weekdays) |
+
+---
