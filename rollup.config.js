@@ -13,7 +13,7 @@ export default [
   {
     input: input,
     output: {
-      file: pkg.module, // specified in package.json (e.g., dist/nepali-bs-date-converter.esm.js)
+      file: pkg.module, // specified in package.json (e.g., dist/nepali-bs-ad-date-converter.esm.js)
       format: "es",
       sourcemap: true,
     },
@@ -27,7 +27,7 @@ export default [
   {
     input: input,
     output: {
-      file: pkg.main, // specified in package.json (e.g., dist/nepali-bs-date-converter.umd.js)
+      file: pkg.main, // specified in package.json (e.g., dist/nepali-bs-ad-date-converter.umd.js)
       format: "umd",
       name: libraryName,
       sourcemap: true,
@@ -49,7 +49,7 @@ export default [
   {
     input: input,
     output: {
-      file: pkg.main.replace(".js", ".min.js"), // e.g., dist/nepali-bs-date-converter.min.js
+      file: pkg.main.replace(".js", ".min.js"), // e.g., dist/nepali-bs-ad-date-converter.min.js
       format: "umd",
       name: libraryName,
       sourcemap: false,

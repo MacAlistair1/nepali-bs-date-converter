@@ -8,14 +8,14 @@ A lightweight JavaScript library for converting **Gregorian (AD)** dates to **Bi
 
 ### Using npm
 
-    npm install nepali-bs-date-converter
+    npm install nepali-bs-ad-date-converter
 
 ### Via CDN (For Browser Use)
 For direct use in a web browser without a build step, include the UMD bundle script.  
-Note: You must run a build tool (like Rollup or Webpack) to generate the dist/nepali-bs-date-converter.umd.js file first.
+Note: You must run a build tool (like Rollup or Webpack) to generate the dist/nepali-bs-ad-date-converter.umd.js file first.
 
 <!-- After running your build step, assuming the file is available via a CDN -->
-<script src="https://cdn.jsdelivr.net/npm/nepali-bs-date-converter@1.0.0/dist/nepali-bs-date-converter.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/nepali-bs-ad-date-converter@1.0.0/dist/nepali-bs-ad-date-converter.umd.js"></script>
 <script>
   // The class is exposed globally as NepaliDateConverter
   const converter = new NepaliDateConverter();
@@ -31,7 +31,7 @@ Note: You must run a build tool (like Rollup or Webpack) to generate the dist/ne
 The library exposes the NepaliDateConverter class with various static methods for conversion, validation, and formatting. You generally do not need to instantiate the class, as all core methods are static.
 
 ### Module Import (Node.js / React / Vue)
-    import NepaliDateConverter from 'nepali-bs-date-converter';
+    import NepaliDateConverter from 'nepali-bs-ad-date-converter';
 
     // AD → BS
     const bsDate = NepaliDateConverter.adToBs('2025-12-04');
@@ -63,7 +63,7 @@ The library exposes the NepaliDateConverter class with various static methods fo
 
 ### Using via <script> (UMD)
 
-    <script src="https://cdn.jsdelivr.net/npm/nepali-bs-date-converter@1.0.0/dist/nepali-bs-date-converter.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/nepali-bs-ad-date-converter@1.0.0/dist/nepali-bs-ad-date-converter.umd.js"></script>
     <script>
       const bsDate = NepaliDateConverter.adToBs('2025-12-04');
       const adDate = NepaliDateConverter.bsToAd('2082-08-19');
@@ -85,7 +85,7 @@ The library exposes the NepaliDateConverter class with various static methods fo
       <h1>Nepali Date Converter Demo</h1>
       <p id="demo"></p>
 
-      <script src="https://cdn.jsdelivr.net/npm/nepali-bs-date-converter@1.0.0/dist/nepali-bs-date-converter.umd.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/nepali-bs-ad-date-converter@1.0.0/dist/nepali-bs-ad-date-converter.umd.js"></script>
       <script>
         const demoEl = document.getElementById('demo');
 
