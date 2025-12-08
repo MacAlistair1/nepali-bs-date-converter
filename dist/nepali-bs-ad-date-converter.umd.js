@@ -687,6 +687,109 @@
 
       return formatted;
     }
+
+    static today(locale = "en", format = "Y-m-d") {
+      const todayAd = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
+      const todayBs = NepaliDateConverter.adToBs(todayAd);
+
+      if (locale === "np") {
+        return NepaliDateConverter.formattedNepaliDate(todayBs, format, locale);
+      }
+
+      return NepaliDateConverter.formattedEnglishDate(todayAd, format, locale);
+    }
+
+    static diff(date1, date2, dateType = "en", returnIn = null) {
+      // 1️⃣ Normalize
+      date1 = NepaliDateConverter.normalize(date1, dateType);
+      date2 = NepaliDateConverter.normalize(date2, dateType);
+
+      // 2️⃣ Convert BS → AD if needed
+      if (dateType === "np") {
+        date1 = NepaliDateConverter.bsToAd(date1);
+        date2 = NepaliDateConverter.bsToAd(date2);
+      }
+
+      const dt1 = new Date(`${date1}T00:00:00Z`);
+      const dt2 = new Date(`${date2}T00:00:00Z`);
+
+      if (isNaN(dt1) || isNaN(dt2)) {
+        throw new Error(`Invalid date(s): ${date1} or ${date2}`);
+      }
+
+      // 3️⃣ Calculate difference
+      const diffMs = Math.abs(dt1 - dt2);
+
+      const years = dt1.getUTCFullYear() - dt2.getUTCFullYear();
+      const months = years * 12 + (dt1.getUTCMonth() - dt2.getUTCMonth());
+
+      const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+      const hours = diffMs / (1000 * 60 * 60);
+      const minutes = diffMs / (1000 * 60);
+      const seconds = diffMs / 1000;
+
+      const result = {
+        years: Math.abs(years),
+        months: Math.abs(months),
+        days,
+        hours,
+        minutes,
+        seconds,
+      };
+
+      if (returnIn && result[returnIn] !== undefined) {
+        return result[returnIn];
+      }
+
+      return result;
+    }
+
+    static humanDiff(date1, date2, dateType = "en", locale = "en") {
+      const diff = NepaliDateConverter.diff(date1, date2, dateType);
+
+      const years = diff.years;
+      const months = diff.months % 12;
+      let days = diff.days - years * 365 - months * 30;
+      if (days < 0) days = 0;
+
+      const labelsEn = { year: "year", month: "month", day: "day" };
+      const labelsNp = { year: "वर्ष", month: "महिना", day: "दिन" };
+
+      const L = locale === "np" ? labelsNp : labelsEn;
+
+      const convert = (n) =>
+        locale === "np" ? NepaliDateConverter.toNepaliDigits(n) : n;
+
+      const parts = [];
+
+      if (years > 0)
+        parts.push(
+          `${convert(years)} ${L.year}${locale === "en" && years > 1 ? "s" : ""}`
+        );
+
+      if (months > 0)
+        parts.push(
+          `${convert(months)} ${L.month}${
+          locale === "en" && months > 1 ? "s" : ""
+        }`
+        );
+
+      if (days > 0 || parts.length === 0)
+        parts.push(
+          `${convert(days)} ${L.day}${locale === "en" && days > 1 ? "s" : ""}`
+        );
+
+      return parts.join(", ");
+    }
+
+    static toNepaliDigits(number) {
+      const map = BsCalendar.nepaliDigits();
+      return number
+        .toString()
+        .split("")
+        .map((ch) => (/\d/.test(ch) ? map[ch] : ch))
+        .join("");
+    }
   }
 
   return NepaliDateConverter;
